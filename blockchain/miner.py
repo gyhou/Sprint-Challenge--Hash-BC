@@ -23,16 +23,16 @@ def proof_of_work(last_proof):
     start = timer()
 
     print(f"\nLast proof: {last_proof} -- Searching for next proof..\n")
-    proof = 84513
+    proof = random.randint(0, 999999)
     #  TODO: Your code here
     last = f"{last_proof}".encode()
     last_hash = hashlib.sha256(last).hexdigest()
 
     while valid_proof(last_hash, proof) is False:
-      if timer() - start > 1.3:
-        return proof
-      else:
-        proof += 2
+        if timer() - start < 1:
+            proof += 2
+        else:
+            return proof
     print(f"Proof found: {proof} in {timer() - start:.3f}s")
     return proof
 
@@ -59,8 +59,6 @@ if __name__ == '__main__':
     else:
         node = "https://lambda-coin.herokuapp.com/api"
 
-    coins_mined = 0
-
     # Load or create ID
     f = open("my_id.txt", "r")
     id = f.read()
@@ -70,12 +68,20 @@ if __name__ == '__main__':
     if id == 'NONAME\n':
         print("ERROR: You must change your name in `my_id.txt`!")
         exit()
+
+    r = requests.get(url=node + "/totals")
+    data = r.json()
+    if data['totals'][id]:
+        coins_mined = data['totals'][id]
+    else:
+        coins_mined = 0
+
     # Run forever until interrupted
     while True:
         # Get the last proof from the server
         r = requests.get(url=node + "/last_proof")
         data = r.json()
-        
+
         new_proof = proof_of_work(data.get('proof'))
 
         post_data = {"proof": new_proof,
