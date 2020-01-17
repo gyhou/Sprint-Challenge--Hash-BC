@@ -11,15 +11,17 @@ def get_indices_of_item_weights(weights, length, limit):
     for index, w in enumerate(weights):
         hash_table_insert(ht, w, index)
     for pair in ht.storage:
-        if pair:
-            second_key = limit - pair.key
-            if second_key in weights:
-                second_index = hash_table_retrieve(ht, second_key)
-                if second_index != pair.value:
-                    if pair.key <= second_key:
-                        return (second_index, pair.value)
-                    else:
-                        return (pair.value, second_index)
+        while pair:
+            s_key = limit - pair.key
+            if s_key in weights:
+                s_index = hash_table_retrieve(ht, s_key)
+                if pair.key < s_key:
+                    return (s_index, pair.value)
+                elif pair.key > s_key:
+                    return (pair.value, s_index)
+                else:
+                    return (1, 0)
+            pair = pair.next
 
     return None
 
