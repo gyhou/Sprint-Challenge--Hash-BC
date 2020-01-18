@@ -18,12 +18,10 @@ def reconstruct_trip(tickets, length):
         hash_table_insert(ht, t.source, t.destination)
 
     index = 0
-    source = "NONE"
-    while hash_table_retrieve(ht, source) != 'NONE':
-        destination = hash_table_retrieve(ht, source)
+    destination = hash_table_retrieve(ht, "NONE")
+    while index < length:
         route[index] = destination
-        source = destination
+        destination = hash_table_retrieve(ht, destination)
         index += 1
-
-    route[-1] = "NONE"
+        
     return route

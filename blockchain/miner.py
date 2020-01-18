@@ -29,7 +29,7 @@ def proof_of_work(last_proof):
     last_hash = hashlib.sha256(last).hexdigest()
 
     while valid_proof(last_hash, proof) is False:
-        if timer() - start < 1:
+        if timer() - start < 1.3:
             proof += 2
         else:
             return proof
