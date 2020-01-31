@@ -1,8 +1,4 @@
-
-
-# '''
 # Linked List hash table key/value pair
-# '''
 class LinkedPair:
     def __init__(self, key, value):
         self.key = key
@@ -10,9 +6,7 @@ class LinkedPair:
         self.next = None
 
 
-# '''
 # Resizing hash table
-# '''
 class HashTable:
     def __init__(self, capacity):
         self.capacity = capacity
@@ -28,11 +22,7 @@ def hash(x, max):
     return x % max
 
 
-# '''
-# Fill this in.
-
 # Hint: Used the LL handle collisions
-# '''
 def hash_table_insert(hash_table, key, value):
     index = hash(key, len(hash_table.storage))
 
@@ -51,11 +41,8 @@ def hash_table_insert(hash_table, key, value):
         hash_table.storage[index] = new_pair
 
 
-# '''
-# Fill this in.
-
-# If you try to remove a value that isn't there, print a warning.
-# '''
+# If you try to remove a value that isn't there, 
+# print a warning.
 def hash_table_remove(hash_table, key):
     index = hash(key, len(hash_table.storage))
 
@@ -75,11 +62,7 @@ def hash_table_remove(hash_table, key):
             last_pair.next = current_pair.next
 
 
-# '''
-# Fill this in.
-
 # Should return None if the key is not found.
-# '''
 def hash_table_retrieve(hash_table, key):
     index = hash(key, len(hash_table.storage))
 
@@ -91,9 +74,6 @@ def hash_table_retrieve(hash_table, key):
         current_pair = current_pair.next
 
 
-# '''
-# Fill this in
-# '''
 def hash_table_resize(hash_table):
     new_hash_table = HashTable(2 * len(hash_table.storage))
 

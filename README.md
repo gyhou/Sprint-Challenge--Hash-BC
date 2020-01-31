@@ -26,11 +26,16 @@ During your challenge, you will be pulled aside by a PM for a 5 minute interview
 
 Explain in detail the workings of a dynamic array:
 * What is the runtime complexity to access an array, add or remove from the front, and add or remove from the back?
+    * Front - O(n)
+    * Back - O(1)
 * What is the worse case scenario if you try to extend the storage size of a dynamic array?
+    * O(n)
 
 Explain how blockchain networks remain in consensus:
 * What does a node do if it gets a message from another in the network with a new block?
-* Why can't someone cheat by changing a transaction from an earlier block to give themselves coins?
+    * A node will check and verify if all transactions in a new block are valid. If all the nodes in the network agree the transactions in a new block are correct, the new block gets added to every node's Blockchain.
+* Why can't someone cheat by changing a transaction from an earlier block to give themselves coins? 
+    * The cheater would have to redo all the computations for subsequent blocks before everybody else finish the newest block.
 
 ## Project Set Up
 
